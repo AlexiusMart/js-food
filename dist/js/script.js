@@ -130,7 +130,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   // timer
-  const endDate = '2022-11-27';
+  const endDate = '2022-12-27';
   function getTimeRemaining(lastDate) {
     let days, hours, minutes, seconds;
     const t = Date.parse(lastDate) - Date.parse(new Date());
@@ -319,7 +319,7 @@ window.addEventListener('DOMContentLoaded', () => {
       thanksModal.remove();
       prevModalDialog.classList.remove('hide');
       closeModal();
-    }, 4000);
+    }, 40000);
   }
 });
 
