@@ -1,5 +1,4 @@
-function timer() {
-    const endDate = '2023-02-15';
+function timer(id, endTime) {
 
     function getTimeRemaining(lastDate) {
         let days, hours, minutes, seconds;
@@ -57,7 +56,7 @@ function timer() {
         }
     }
 
-    setTimer('.timer', endDate);
+    setTimer(id, endTime);
 }
 
 export default timer;
