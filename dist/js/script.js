@@ -109,11 +109,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 window.addEventListener('DOMContentLoaded', () => {
+  const modalTimerId = setTimeout(() => Object(_modules_modal__WEBPACK_IMPORTED_MODULE_3__["openModal"])('.modal', modalTimerId), 50000);
   Object(_modules_calc__WEBPACK_IMPORTED_MODULE_0__["default"])();
   Object(_modules_cards__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])();
-  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_3__["default"])('[data-modal]', '.modal');
+  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_3__["default"])('[data-modal]', '.modal', modalTimerId);
   Object(_modules_slider__WEBPACK_IMPORTED_MODULE_4__["default"])();
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_timer__WEBPACK_IMPORTED_MODULE_6__["default"])();
@@ -384,32 +386,33 @@ function forms() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openModal", function() { return openModal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "closeModal", function() { return closeModal; });
-function openModal(modalSelector) {
-  modalSelector.style.display = 'block';
+function openModal(modalSelector, modalTimerId) {
+  const modal = document.querySelector(modalSelector);
+  modal.style.display = 'block';
   document.body.style.overflow = 'hidden';
   clearTimeout(modalTimerId);
 }
 function closeModal(modalSelector) {
-  modalSelector.style.display = 'none';
+  const modal = document.querySelector(modalSelector);
+  modal.style.display = 'none';
   document.body.style.overflow = '';
 }
 function modal(triggerSelector, modalSelector) {
-  const modalOpen = document.querySelectorAll(triggerSelector),
-    modalWindow = document.querySelector(modalSelector);
-  modalOpen.forEach(item => {
+  const modalTrigger = document.querySelectorAll(triggerSelector),
+    modal = document.querySelector(modalSelector);
+  modalTrigger.forEach(item => {
     item.addEventListener('click', () => openModal(modalSelector));
   });
-  modalWindow.addEventListener('click', e => {
-    if (e.target === modalWindow || e.target.getAttribute('data-close') == '') {
+  modal.addEventListener('click', e => {
+    if (e.target === modal || e.target.getAttribute('data-close') == '') {
       closeModal(modalSelector);
     }
   });
   document.addEventListener('keydown', e => {
-    if (e.code === 'Escape' && modalWindow.style.display === 'block') {
+    if (e.code === 'Escape' && modal.style.display === 'block') {
       closeModal(modalSelector);
     }
   });
-  const modalTimerId = setTimeout(openModal, 50000);
   function showModalByScroll() {
     if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
       openModal(modalSelector);
