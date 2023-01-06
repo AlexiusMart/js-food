@@ -60,4 +60,4 @@ function timer() {
     setTimer('.timer', endDate);
 }
 
-module.exports = timer;
+export default timer;
